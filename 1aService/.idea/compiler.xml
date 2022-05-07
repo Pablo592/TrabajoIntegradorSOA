@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="TrabajoIntegradorSOA" />
+        <module name="1aService" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="1aService" options="-parameters" />
       <module name="TrabajoIntegradorSOA" options="-parameters" />
     </option>
   </component>

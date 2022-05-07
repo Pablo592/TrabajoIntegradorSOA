@@ -19,9 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
-//Sección Test del login-json de Postman
-//var jsonData = pm.response.json();
-//pm.globals.set("tokenIW3", jsonData.authtoken);
 public class CustomTokenAuthenticationFilter extends OncePerRequestFilter {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 
