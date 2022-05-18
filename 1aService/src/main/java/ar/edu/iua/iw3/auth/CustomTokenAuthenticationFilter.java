@@ -1,7 +1,7 @@
 package ar.edu.iua.iw3.auth;
 
-import ar.edu.iua.iw3.modelo.Cuentas.IUsuarioNegocio;
-import ar.edu.iua.iw3.modelo.Cuentas.Usuario;
+import ar.edu.iua.iw3.negocio.IUsuarioNegocio;
+import ar.edu.iua.iw3.modelo.persistencia.Usuario;
 import ar.edu.iua.iw3.negocio.excepciones.NegocioException;
 import ar.edu.iua.iw3.negocio.excepciones.NoEncontradoException;
 import ar.edu.iua.iw3.security.authtoken.AuthToken;

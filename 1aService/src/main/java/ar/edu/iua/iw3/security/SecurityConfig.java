@@ -1,12 +1,11 @@
 package ar.edu.iua.iw3.security;
 
 import ar.edu.iua.iw3.auth.CustomTokenAuthenticationFilter;
-import ar.edu.iua.iw3.modelo.Cuentas.IUsuarioNegocio;
+import ar.edu.iua.iw3.negocio.IUsuarioNegocio;
 import ar.edu.iua.iw3.security.authtoken.IAuthTokenBusiness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
