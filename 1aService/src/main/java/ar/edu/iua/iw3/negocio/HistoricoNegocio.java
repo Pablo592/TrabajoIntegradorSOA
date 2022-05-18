@@ -22,7 +22,7 @@ public class HistoricoNegocio {
         Optional<Historico> o = null;
         try {
 
-                o = Optional.ofNullable(o.get().getClase(rest1B.getHistorico(id).toString()));
+                o = Optional.ofNullable(rest1B.getHistorico(id));
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new NegocioException(e);
