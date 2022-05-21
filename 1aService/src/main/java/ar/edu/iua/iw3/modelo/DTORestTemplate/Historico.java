@@ -3,7 +3,6 @@ package ar.edu.iua.iw3.modelo.DTORestTemplate;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import springfox.documentation.spring.web.json.Json;
 
 import java.io.Serializable;
 import java.util.ArrayList;

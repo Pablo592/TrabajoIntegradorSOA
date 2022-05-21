@@ -18,7 +18,7 @@ public interface IHistoricoBusiness {
 
 	public Historico update(Historico historico) throws NoEncontradoException, NegocioException;
 
-	public void delete(Long id) throws NoEncontradoException, NegocioException;
+	public RespuestaGenerica<Historico> delete(Long id) throws NoEncontradoException, NegocioException;
 
 	public Historico loadLast()throws NoEncontradoException, NegocioException;
 }

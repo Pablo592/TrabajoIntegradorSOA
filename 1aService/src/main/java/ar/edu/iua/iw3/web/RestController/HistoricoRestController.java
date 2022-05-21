@@ -1,26 +1,14 @@
 package ar.edu.iua.iw3.web.RestController;
 
 import ar.edu.iua.iw3.modelo.DTORestTemplate.Historico;
-import ar.edu.iua.iw3.modelo.persistencia.Usuario;
-import ar.edu.iua.iw3.negocio.HistoricoNegocio;
 import ar.edu.iua.iw3.negocio.IHistoricoNegocio;
-import ar.edu.iua.iw3.negocio.excepciones.BadRequest;
-import ar.edu.iua.iw3.negocio.excepciones.EncontradoException;
-import ar.edu.iua.iw3.web.RestTemplate.RestTemplate1B;
+import ar.edu.iua.iw3.util.MensajeRespuesta;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import ar.edu.iua.iw3.negocio.excepciones.NegocioException;
@@ -51,34 +39,49 @@ public class HistoricoRestController {
 		return new ResponseEntity<Historico>(HttpStatus.NOT_FOUND);
 	}
 }
-	//---------Guardar Historico en BD------------------
 
-	/*@PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> add(@RequestBody Historico historico) {
+
+	@GetMapping(value = "/last")
+	public ResponseEntity<Historico> loadLast() throws NegocioException, NoEncontradoException {
 		try {
-			System.out.println("historico:"+historico.toString());
-			historicoBusiness.add(historico);
-			HttpHeaders responseHeaders = new HttpHeaders();
-			responseHeaders.set("location", "/historico"+ '/' + historico.getId_historico() );//
-			return new ResponseEntity<String>(responseHeaders, HttpStatus.CREATED);
+			Historico h = new Historico();
+			return new ResponseEntity<Historico>(historicoNegocio.buscarUltimoHistorico(), HttpStatus.OK);
 		} catch (NegocioException e) {
-
-			return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+			log.error(e.getMessage(), e);
+			return new ResponseEntity<Historico>(HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (NoEncontradoException e) {
+			log.error(e.getMessage(), e);
+			return new ResponseEntity<Historico>(HttpStatus.NOT_FOUND);
 		}
 	}
-	//---------Ultimo valor ------------------
+	//---------Guardar Historico en BD------------------
 
-	@GetMapping(value = "/last", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Historico> loadLasted() {
-
-			try {
-				return new ResponseEntity<Historico>(historicoBusiness.loadLast(), HttpStatus.OK);
-			} catch (NegocioException e) {
-				return new ResponseEntity<Historico>(HttpStatus.INTERNAL_SERVER_ERROR);
-			} catch (NoEncontradoException e) {
-				// TODO Auto-generated catch block
-				return new ResponseEntity<Historico>(HttpStatus.NOT_FOUND);
-			}
+	@PostMapping(value="/add")
+	public ResponseEntity<MensajeRespuesta> agregar(@RequestBody Historico historico) {
+		try {
+			MensajeRespuesta r = historicoNegocio.agregar(historico).getMensaje();
+			return new ResponseEntity<MensajeRespuesta>(r, HttpStatus.CREATED);
+		} catch (NegocioException e) {
+			log.error(e.getMessage(), e);
+			MensajeRespuesta r = new MensajeRespuesta(-1, e.getMessage());
+			return new ResponseEntity<MensajeRespuesta>(r, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-*/
-}
+		}
+
+	@DeleteMapping(value="/{id}")
+	public ResponseEntity<MensajeRespuesta> eliminar(@PathVariable("id") Long id) {
+		try {
+			MensajeRespuesta r =   historicoNegocio.eliminar(id).getMensaje();
+			return new ResponseEntity<MensajeRespuesta>(r,HttpStatus.OK);
+		} catch (NegocioException e) {
+			log.error(e.getMessage(), e);
+			MensajeRespuesta r=new MensajeRespuesta(-1,e.getMessage());
+			return new ResponseEntity<MensajeRespuesta>(r,HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (NoEncontradoException e) {
+			log.error(e.getMessage(), e);
+			MensajeRespuesta r=new MensajeRespuesta(-1,e.getMessage());
+			return new ResponseEntity<MensajeRespuesta>(r,HttpStatus.NOT_FOUND);
+		}
+	}
+	}
+

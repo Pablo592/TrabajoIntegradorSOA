@@ -20,16 +20,10 @@ public class RestTemplate1B {
     org.springframework.web.client.RestTemplate restTemplate;
 
 
-    public Object postHistorico(String id) {
-        String url = "http://localhost:8090/historico/add".concat(id);
-        Object forObject = restTemplate.getForObject(url,Object.class);
-        log.info("Result" + forObject);
-        return forObject;
-    }
     //EDIT AYEEE	
-    public Object getHistoricoUltimo() {
+    public Historico getHistoricoUltimo() {
         String url = "http://localhost:8090/historico/last";
-        Object forObject = restTemplate.getForObject(url,Object.class);
+        Historico forObject = restTemplate.getForObject(url,Historico.class);
         log.info("Result" + forObject);
         return forObject;
     }
@@ -42,9 +36,13 @@ public class RestTemplate1B {
         return forObject;
     }
 
-    public MensajeRespuesta addHistorico(Historico historico,MensajeRespuesta mensaje) throws RestClientException{
-        return restTemplate.postForObject("http://localhost:8090/historico/add",historico,mensaje.getClass());
+    public MensajeRespuesta addHistorico(Historico historico) throws RestClientException{
+      MensajeRespuesta mensaje =  new MensajeRespuesta();
+      return restTemplate.postForObject("http://localhost:8090/historico/add",historico,mensaje.getClass());
     }
 
 
+    public void deleteHistorico(Long id) throws RestClientException{
+        restTemplate.delete("http://localhost:8090/historico/".concat(String.valueOf(id)));
+    }
 }

@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import ar.edu.iua.iw3.util.MensajeRespuesta;
 import ar.edu.iua.iw3.util.RespuestaGenerica;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ import ar.edu.iua.iw3.modelo.Historico.HistoricoRepository;
 
 @Service
 public class HistoricoBusiness implements IHistoricoBusiness{
+
+	private Logger log = LoggerFactory.getLogger(HistoricoBusiness.class);
+
 	@Autowired
 	private HistoricoRepository historicoDAO;
 	
@@ -26,6 +31,7 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 		try {
 			op =  historicoDAO.findById(id);
 		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 			throw new NegocioException(e);
 		}
 		if (!op.isPresent()) {
@@ -48,6 +54,7 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 			m.setMensaje(historico.toString());
 			return new RespuestaGenerica<Historico>(historico, m);
 		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 			throw new NegocioException(e);
 		}
 	}
@@ -59,8 +66,18 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 	}
 
 	@Override
-	public void delete(Long id) throws NoEncontradoException, NegocioException {
-		// TODO Auto-generated method stub
+	public RespuestaGenerica<Historico> delete(Long id) throws NegocioException, NoEncontradoException {
+		MensajeRespuesta m=new MensajeRespuesta();
+		Historico h = load(id);
+		if(h == null)
+			throw new NoEncontradoException("El historico que desea eliminar no se encuentra registrado");
+		try {
+			historicoDAO.deleteById(id);
+			return new RespuestaGenerica<Historico>(h, m);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new NegocioException(e);
+		}
 		
 	}
 
@@ -70,6 +87,7 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 		try {
 			op =  historicoDAO.findLast();
 		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 			throw new NegocioException(e);
 		}
 	
