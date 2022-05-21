@@ -1,13 +1,9 @@
 package ar.edu.iua.iw3.modelo.DTORestTemplate;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Historico implements Serializable{
 	
@@ -36,25 +32,6 @@ public class Historico implements Serializable{
 	
 
 	//-------Setters and Getters---------
-
-	public Historico getClase(String json){
-		Historico h = new Historico();
-		GsonBuilder builder = new GsonBuilder();
-		builder.setPrettyPrinting();
-		Gson gson = builder.create();
-		h = gson.fromJson(json,h.getClass());
-		return h;
-	}
-
-
-	public List<Historico> getListClase(String json){
-		List<Historico> h = new ArrayList<Historico>();
-		GsonBuilder builder = new GsonBuilder();
-		builder.setPrettyPrinting();
-		Gson gson = builder.create();
-		h = gson.fromJson(json,h.getClass());
-		return h;
-	}
 
 	public long getId_historico() {
 		return id_historico;
