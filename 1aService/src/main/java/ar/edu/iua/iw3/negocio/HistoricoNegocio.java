@@ -8,10 +8,12 @@ import ar.edu.iua.iw3.web.RestTemplate.RestTemplate1B;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-public class HistoricoNegocio {
+@Service
+public class HistoricoNegocio implements IHistoricoNegocio{
 
     private Logger log = LoggerFactory.getLogger(HistoricoNegocio.class);
 

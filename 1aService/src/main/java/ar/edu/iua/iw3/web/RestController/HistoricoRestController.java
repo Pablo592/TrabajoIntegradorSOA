@@ -3,6 +3,7 @@ package ar.edu.iua.iw3.web.RestController;
 import ar.edu.iua.iw3.modelo.DTORestTemplate.Historico;
 import ar.edu.iua.iw3.modelo.persistencia.Usuario;
 import ar.edu.iua.iw3.negocio.HistoricoNegocio;
+import ar.edu.iua.iw3.negocio.IHistoricoNegocio;
 import ar.edu.iua.iw3.negocio.excepciones.BadRequest;
 import ar.edu.iua.iw3.negocio.excepciones.EncontradoException;
 import ar.edu.iua.iw3.web.RestTemplate.RestTemplate1B;
@@ -32,8 +33,8 @@ public class HistoricoRestController {
 	
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 
-
-	private HistoricoNegocio hn = new HistoricoNegocio();
+	@Autowired
+	private IHistoricoNegocio historicoNegocio;
 	
 	//---------Listar por ID------------------
 
@@ -41,7 +42,7 @@ public class HistoricoRestController {
 	public ResponseEntity<Historico> load(@PathVariable("id") Long id) throws NegocioException, NoEncontradoException {
 		try {
 		Historico h = new Historico();
-		return new ResponseEntity<Historico>(hn.buscarHistorico(id), HttpStatus.OK);
+		return new ResponseEntity<Historico>(historicoNegocio.buscarHistorico(id), HttpStatus.OK);
 	} catch (NegocioException e) {
 		log.error(e.getMessage(), e);
 		return new ResponseEntity<Historico>(HttpStatus.INTERNAL_SERVER_ERROR);
