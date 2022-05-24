@@ -4,13 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
+import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,12 +16,21 @@ import springfox.documentation.spring.web.json.Json;
 @Entity
 @Table(name = "historico")
 public class Historico implements Serializable{
-	
+
+	public Historico(){
+		this.fechaHoraRecepcion = new Date();
+	}
+
 	@Override
 	public String toString() {
-		return "Historico [id_historico=" + id_historico + ", fechaHoraRecepcion=" + fechaHoraRecepcion + ", rawData="
-				+ rawData + ", categoria=" + categoria + ", subCategoria=" + subCategoria + ", indicador=" + indicador
-				+ "]";
+		return "Historico{" +
+				"id_historico=" + id_historico +
+				", fechaHoraRecepcion=" + fechaHoraRecepcion +
+				", rawData=" + rawData +
+				", categoria='" + categoria + '\'' +
+				", subCategoria='" + subCategoria + '\'' +
+				", indicador='" + identificador + '\'' +
+				'}';
 	}
 
 	private static final long serialVersionUID = -2096655693932225923L;
@@ -41,8 +44,9 @@ public class Historico implements Serializable{
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private Date fechaHoraRecepcion;
 
-	@Column(length = 65555,nullable = false)
-	private String rawData;
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name="rawData")
+	private RawData rawData;
 
 	@Column(length = 100,nullable = false)
 	private String categoria;
@@ -51,9 +55,9 @@ public class Historico implements Serializable{
 	private String subCategoria;
 	
 	@Column(length = 100,nullable = false)
-	private String indicador;
-	
-	
+	private String identificador;
+
+
 
 	//-------Setters and Getters---------
 
@@ -73,12 +77,12 @@ public class Historico implements Serializable{
 		this.fechaHoraRecepcion = fechaHoraRecepcion;
 	}
 
-	public String getRawData() {
+	public RawData getRawData() {
 		return rawData;
 	}
 
-	public void setRawData(String string) {
-		this.rawData = string;
+	public void setRawData(RawData rawData) {
+		this.rawData = rawData;
 	}
 
 	public String getCategoria() {
@@ -97,12 +101,12 @@ public class Historico implements Serializable{
 		this.subCategoria = subCategoria;
 	}
 
-	public String getIndicador() {
-		return indicador;
+	public String getIdentificador() {
+		return identificador;
 	}
 
-	public void setIndicador(String indicador) {
-		this.indicador = indicador;
+	public void setIndicador(String identificador) {
+		this.identificador = identificador;
 	}
 
 

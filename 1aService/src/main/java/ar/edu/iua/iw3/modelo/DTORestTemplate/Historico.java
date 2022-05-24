@@ -10,7 +10,7 @@ public class Historico implements Serializable{
 	@Override
 	public String toString() {
 		return "Historico [id_historico=" + id_historico + ", fechaHoraRecepcion=" + fechaHoraRecepcion + ", rawData="
-				+ rawData + ", categoria=" + categoria + ", subCategoria=" + subCategoria + ", indicador=" + indicador
+				+ rawData + ", categoria=" + categoria + ", subCategoria=" + subCategoria + ", indicador=" + identificador
 				+ "]";
 	}
 
@@ -21,17 +21,14 @@ public class Historico implements Serializable{
 
 	private Date fechaHoraRecepcion;
 
-	private String rawData;
+	private RawData rawData;
 
 	private String categoria;
 
 	private String subCategoria;
 
-	private String indicador;
+	private String identificador;
 
-	
-
-	//-------Setters and Getters---------
 
 	public long getId_historico() {
 		return id_historico;
@@ -49,12 +46,12 @@ public class Historico implements Serializable{
 		this.fechaHoraRecepcion = fechaHoraRecepcion;
 	}
 
-	public String getRawData() {
+	public RawData getRawData() {
 		return rawData;
 	}
 
-	public void setRawData(String string) {
-		this.rawData = string;
+	public void setRawData(RawData rawData) {
+		this.rawData = rawData;
 	}
 
 	public String getCategoria() {
@@ -73,13 +70,11 @@ public class Historico implements Serializable{
 		this.subCategoria = subCategoria;
 	}
 
-	public String getIndicador() {
-		return indicador;
+	public String getIdentificador() {
+		return identificador;
 	}
 
-	public void setIndicador(String indicador) {
-		this.indicador = indicador;
+	public void setIdentificador(String identificador) {
+		this.identificador = identificador;
 	}
-
-
 }
