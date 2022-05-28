@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 
+import ar.edu.iua.iw3.modelo.Historico.HistoricoDTO;
 import ar.edu.iua.iw3.util.MensajeRespuesta;
 import ar.edu.iua.iw3.util.RespuestaGenerica;
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 			throw new NegocioException(e);
 		}
 		if (!op.isPresent()) {
-			throw new NoEncontradoException("El Orden con el id " + id + " no se encuentra en la BD");
+			throw new NoEncontradoException("El historico no se encuentra en la BD");
 		}
 		return op.get();
 	}
@@ -82,16 +83,20 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 	}
 
 	@Override
-	public Historico loadLast() throws NoEncontradoException, NegocioException {
+	public HistoricoDTO loadLast() throws NoEncontradoException, NegocioException {
+
 		Optional<Historico> op;
 		try {
-			op =  historicoDAO.findLast();
+			op = historicoDAO.findLast();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new NegocioException(e);
 		}
+		if (!op.isPresent()) {
+			throw new NoEncontradoException("No hay ordenes cargadas en la BD");
+		}
 	
-		return op.get();
+		return new HistoricoDTO(op.get());
 	}
 
 }

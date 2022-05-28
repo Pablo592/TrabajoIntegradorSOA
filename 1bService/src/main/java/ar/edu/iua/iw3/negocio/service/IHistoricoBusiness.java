@@ -2,6 +2,7 @@ package ar.edu.iua.iw3.negocio.service;
 
 import java.util.List;
 
+import ar.edu.iua.iw3.modelo.Historico.HistoricoDTO;
 import ar.edu.iua.iw3.negocio.excepciones.NegocioException;
 import ar.edu.iua.iw3.negocio.excepciones.NoEncontradoException;
 import ar.edu.iua.iw3.modelo.Historico.Historico;
@@ -20,5 +21,5 @@ public interface IHistoricoBusiness {
 
 	public RespuestaGenerica<Historico> delete(Long id) throws NoEncontradoException, NegocioException;
 
-	public Historico loadLast()throws NoEncontradoException, NegocioException;
+	public HistoricoDTO loadLast()throws NoEncontradoException, NegocioException;
 }

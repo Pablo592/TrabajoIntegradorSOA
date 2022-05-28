@@ -1,17 +1,11 @@
 package ar.edu.iua.iw3.modelo.Historico;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-
-import springfox.documentation.spring.web.json.Json;
 
 @Entity
 @Table(name = "historico")

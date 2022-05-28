@@ -1,5 +1,6 @@
 package ar.edu.iua.iw3.web;
 
+import ar.edu.iua.iw3.modelo.Historico.HistoricoDTO;
 import ar.edu.iua.iw3.util.MensajeRespuesta;
 import ar.edu.iua.iw3.util.RespuestaGenerica;
 import org.slf4j.Logger;
@@ -61,15 +62,15 @@ public class HistoricoRestController {
 	//---------Ultimo valor ------------------
 
 	@GetMapping(value = "/last", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Historico> loadLasted() {
+	public ResponseEntity<HistoricoDTO> loadLasted() {
 
 			try {
-				return new ResponseEntity<Historico>(historicoBusiness.loadLast(), HttpStatus.OK);
+				return new ResponseEntity<HistoricoDTO>(historicoBusiness.loadLast(), HttpStatus.OK);
 			} catch (NegocioException e) {
-				return new ResponseEntity<Historico>(HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<HistoricoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
 			} catch (NoEncontradoException e) {
 				// TODO Auto-generated catch block
-				return new ResponseEntity<Historico>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<HistoricoDTO>(HttpStatus.NOT_FOUND);
 			}
 		}
 

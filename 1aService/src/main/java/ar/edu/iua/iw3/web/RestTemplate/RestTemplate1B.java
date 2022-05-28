@@ -1,6 +1,7 @@
 package ar.edu.iua.iw3.web.RestTemplate;
 
 import ar.edu.iua.iw3.modelo.DTORestTemplate.Historico;
+import ar.edu.iua.iw3.modelo.DTORestTemplate.UltimoHistorico;
 import ar.edu.iua.iw3.util.MensajeRespuesta;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
@@ -20,11 +21,11 @@ public class RestTemplate1B {
     org.springframework.web.client.RestTemplate restTemplate;
 
 
-    //EDIT AYEEE	
-    public Historico getHistoricoUltimo() {
+    public UltimoHistorico getHistoricoUltimo() {
         String url = "http://localhost:8090/historico/last";
-        Historico forObject = restTemplate.getForObject(url,Historico.class);
+        UltimoHistorico forObject = restTemplate.getForObject(url,UltimoHistorico.class);
         log.info("Result" + forObject);
+        System.out.println(forObject.toString());
         return forObject;
     }
     

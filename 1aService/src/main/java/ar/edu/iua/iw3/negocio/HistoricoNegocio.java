@@ -2,6 +2,7 @@ package ar.edu.iua.iw3.negocio;
 
 
 import ar.edu.iua.iw3.modelo.DTORestTemplate.Historico;
+import ar.edu.iua.iw3.modelo.DTORestTemplate.UltimoHistorico;
 import ar.edu.iua.iw3.negocio.excepciones.NegocioException;
 import ar.edu.iua.iw3.negocio.excepciones.NoEncontradoException;
 import ar.edu.iua.iw3.util.MensajeRespuesta;
@@ -37,8 +38,8 @@ public class HistoricoNegocio implements IHistoricoNegocio{
     }
 
     @Override
-    public Historico buscarUltimoHistorico() throws NegocioException, NoEncontradoException {
-        Optional<Historico> o = null;
+    public UltimoHistorico buscarUltimoHistorico() throws NegocioException, NoEncontradoException {
+        Optional<UltimoHistorico> o = null;
         try {
 
             o = Optional.ofNullable(rest1B.getHistoricoUltimo());

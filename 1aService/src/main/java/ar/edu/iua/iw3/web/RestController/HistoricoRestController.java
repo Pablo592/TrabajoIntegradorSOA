@@ -1,6 +1,7 @@
 package ar.edu.iua.iw3.web.RestController;
 
 import ar.edu.iua.iw3.modelo.DTORestTemplate.Historico;
+import ar.edu.iua.iw3.modelo.DTORestTemplate.UltimoHistorico;
 import ar.edu.iua.iw3.negocio.IHistoricoNegocio;
 import ar.edu.iua.iw3.util.MensajeRespuesta;
 import org.slf4j.Logger;
@@ -42,16 +43,16 @@ public class HistoricoRestController {
 
 
 	@GetMapping(value = "/last")
-	public ResponseEntity<Historico> loadLast() throws NegocioException, NoEncontradoException {
+	public ResponseEntity<UltimoHistorico> loadLast() throws NegocioException, NoEncontradoException {
 		try {
 			Historico h = new Historico();
-			return new ResponseEntity<Historico>(historicoNegocio.buscarUltimoHistorico(), HttpStatus.OK);
+			return new ResponseEntity<UltimoHistorico>(historicoNegocio.buscarUltimoHistorico(), HttpStatus.OK);
 		} catch (NegocioException e) {
 			log.error(e.getMessage(), e);
-			return new ResponseEntity<Historico>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<UltimoHistorico>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (NoEncontradoException e) {
 			log.error(e.getMessage(), e);
-			return new ResponseEntity<Historico>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<UltimoHistorico>(HttpStatus.NOT_FOUND);
 		}
 	}
 	//---------Guardar Historico en BD------------------
