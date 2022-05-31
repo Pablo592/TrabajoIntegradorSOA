@@ -3,6 +3,7 @@ package ar.edu.iua.iw3.web;
 import ar.edu.iua.iw3.modelo.Historico.HistoricoDTO;
 import ar.edu.iua.iw3.util.MensajeRespuesta;
 import ar.edu.iua.iw3.util.RespuestaGenerica;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,14 +66,15 @@ public class HistoricoRestController {
 	public ResponseEntity<HistoricoDTO> loadLasted() {
 
 			try {
-				return new ResponseEntity<HistoricoDTO>(historicoBusiness.loadLast(), HttpStatus.OK);
+				return new ResponseEntity<HistoricoDTO>(historicoBusiness.loadLastHistory(), HttpStatus.OK);
 			} catch (NegocioException e) {
 				return new ResponseEntity<HistoricoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
 			} catch (NoEncontradoException e) {
-				// TODO Auto-generated catch block
 				return new ResponseEntity<HistoricoDTO>(HttpStatus.NOT_FOUND);
+			} catch (JsonProcessingException e) {
+				return new ResponseEntity<HistoricoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
-		}
+	}
 
 	//---------Borrar Historico ------------------
 

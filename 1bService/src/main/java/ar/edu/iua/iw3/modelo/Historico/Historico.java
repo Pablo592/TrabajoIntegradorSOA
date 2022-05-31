@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.google.gson.Gson;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -103,6 +104,9 @@ public class Historico implements Serializable{
 		this.identificador = identificador;
 	}
 
-
+public String getJson(Historico historico){
+	final Gson gson = new Gson();
+	return  gson.toJson(historico);
+}
 		
 }

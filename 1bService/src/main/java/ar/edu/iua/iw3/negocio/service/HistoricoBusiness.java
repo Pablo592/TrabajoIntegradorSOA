@@ -1,12 +1,20 @@
 package ar.edu.iua.iw3.negocio.service;
 
+import java.beans.ConstructorProperties;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 
 import ar.edu.iua.iw3.modelo.Historico.HistoricoDTO;
+import ar.edu.iua.iw3.modelo.cache.Memcache;
 import ar.edu.iua.iw3.util.MensajeRespuesta;
 import ar.edu.iua.iw3.util.RespuestaGenerica;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import org.aspectj.apache.bcel.classfile.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +29,20 @@ import ar.edu.iua.iw3.modelo.Historico.HistoricoRepository;
 @Service
 public class HistoricoBusiness implements IHistoricoBusiness{
 
+	public HistoricoBusiness() throws IOException {
+	}
+
+	private static String ultimo  = "ULTIMO";
+
+	private Memcache cache = new Memcache();
+
 	private Logger log = LoggerFactory.getLogger(HistoricoBusiness.class);
 
 	@Autowired
 	private HistoricoRepository historicoDAO;
-	
+
+
+
 	@Override
 	public Historico load(Long id) throws NoEncontradoException, NegocioException {
 		Optional<Historico> op;
@@ -51,8 +68,10 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 	public RespuestaGenerica<Historico> add(Historico historico) throws NegocioException {
 		MensajeRespuesta m=new MensajeRespuesta();
 		try {
+			historico.setFechaHoraRecepcion(new Date());
 			historicoDAO.save(historico);
 			m.setMensaje(historico.toString());
+			cache.agregar(historico,ultimo,3600);
 			return new RespuestaGenerica<Historico>(historico, m);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -83,20 +102,29 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 	}
 
 	@Override
-	public HistoricoDTO loadLast() throws NoEncontradoException, NegocioException {
-
-		Optional<Historico> op;
-		try {
-			op = historicoDAO.findLast();
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			throw new NegocioException(e);
+	public HistoricoDTO loadLastHistory() throws NoEncontradoException, NegocioException{
+		Gson gson = new Gson();
+		String	ultimoHistorico = null;
+		Optional<Historico> o = null;
+		ultimoHistorico =  cache.buscar(ultimo);
+		if(ultimoHistorico == null || ultimoHistorico == "") {
+			try {
+				o = historicoDAO.findLast();
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				throw new NegocioException(e);
+			}
+			if (!o.isPresent()) {
+				throw new NoEncontradoException("No hay historicos registrados");
+			}else {
+				cache.agregar(o.get(), ultimo,3600);
+				System.out.println(o.get() + "Guardado en el cache */*/*/*/*/*/*/");
+			}
+		}else{
+			o = Optional.ofNullable(gson.fromJson(ultimoHistorico, Historico.class));
+			System.out.println(o.get() + " Sacado del cache");
 		}
-		if (!op.isPresent()) {
-			throw new NoEncontradoException("No hay ordenes cargadas en la BD");
-		}
-	
-		return new HistoricoDTO(op.get());
+		return new HistoricoDTO(o.get());
 	}
 
 }
