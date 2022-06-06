@@ -12,7 +12,7 @@ public class Memcache{
 private   MemcachedClient mcc;
 
     public Memcache() throws IOException {
-        this.mcc = new MemcachedClient(new InetSocketAddress("memcached", 11311));
+        this.mcc = new MemcachedClient(new InetSocketAddress("memcached", 11211));
         // Connecting to Memcached server on localhost
 }
 
