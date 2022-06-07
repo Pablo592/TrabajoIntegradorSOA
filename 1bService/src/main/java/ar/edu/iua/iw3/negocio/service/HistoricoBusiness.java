@@ -72,6 +72,7 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 			historicoDAO.save(historico);
 			m.setMensaje(historico.toString());
 			cache.agregar(historico,ultimo,3600);
+			log.debug(historico + "\nGuardado en el cache");
 			return new RespuestaGenerica<Historico>(historico, m);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -118,11 +119,11 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 				throw new NoEncontradoException("No hay historicos registrados");
 			}else {
 				cache.agregar(o.get(), ultimo,3600);
-				System.out.println(o.get() + "Guardado en el cache */*/*/*/*/*/*/");
+				log.debug(o.get() + "\nGuardado en el cache");
 			}
 		}else{
 			o = Optional.ofNullable(gson.fromJson(ultimoHistorico, Historico.class));
-			System.out.println(o.get() + " Sacado del cache");
+			log.debug(o.get() +"\nSacado del cache");
 		}
 		return new HistoricoDTO(o.get());
 	}
