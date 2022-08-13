@@ -1,7 +1,8 @@
-package ar.edu.iua.iw3.modelo.Historico;
+package ar.edu.iua.iw3.modelo.persistencia;
 
 import java.util.Optional;
 
+import ar.edu.iua.iw3.modelo.Historico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

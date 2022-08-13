@@ -1,4 +1,4 @@
-package ar.edu.iua.iw3.modelo.Historico;
+package ar.edu.iua.iw3.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,9 +22,10 @@ public class Historico implements Serializable{
 				"id_historico=" + id_historico +
 				", fechaHoraRecepcion=" + fechaHoraRecepcion +
 				", rawData=" + rawData +
+				", ubicacion=" + ubicacion +
 				", categoria='" + categoria + '\'' +
 				", subCategoria='" + subCategoria + '\'' +
-				", indicador='" + identificador + '\'' +
+				", identificador='" + identificador + '\'' +
 				'}';
 	}
 
@@ -43,6 +44,11 @@ public class Historico implements Serializable{
 	@JoinColumn(name="rawData")
 	private RawData rawData;
 
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name="ubicacion")
+	private Ubicacion ubicacion;
+
+
 	@Column(length = 100,nullable = false)
 	private String categoria;
 	
@@ -55,6 +61,7 @@ public class Historico implements Serializable{
 
 
 	//-------Setters and Getters---------
+
 
 	public long getId_historico() {
 		return id_historico;
@@ -80,6 +87,14 @@ public class Historico implements Serializable{
 		this.rawData = rawData;
 	}
 
+	public Ubicacion getUbicacion() {
+		return ubicacion;
+	}
+
+	public void setUbicacion(Ubicacion ubicacion) {
+		this.ubicacion = ubicacion;
+	}
+
 	public String getCategoria() {
 		return categoria;
 	}
@@ -100,11 +115,11 @@ public class Historico implements Serializable{
 		return identificador;
 	}
 
-	public void setIndicador(String identificador) {
+	public void setIdentificador(String identificador) {
 		this.identificador = identificador;
 	}
 
-public String getJson(Historico historico){
+	public String getJson(Historico historico){
 	final Gson gson = new Gson();
 	return  gson.toJson(historico);
 }

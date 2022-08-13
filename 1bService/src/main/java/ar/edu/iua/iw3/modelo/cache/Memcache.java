@@ -1,6 +1,6 @@
 package ar.edu.iua.iw3.modelo.cache;
 
-import ar.edu.iua.iw3.modelo.Historico.Historico;
+import ar.edu.iua.iw3.modelo.Historico;
 import net.spy.memcached.MemcachedClient;
 import java.io.IOException;
 import java.net.InetSocketAddress;

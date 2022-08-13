@@ -1,27 +1,21 @@
 package ar.edu.iua.iw3.web;
 
-import ar.edu.iua.iw3.modelo.Historico.HistoricoDTO;
+import ar.edu.iua.iw3.modelo.HistoricoDTO;
 import ar.edu.iua.iw3.util.MensajeRespuesta;
-import ar.edu.iua.iw3.util.RespuestaGenerica;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
 import ar.edu.iua.iw3.negocio.service.IHistoricoBusiness;
 import ar.edu.iua.iw3.negocio.excepciones.NegocioException;
 import ar.edu.iua.iw3.negocio.excepciones.NoEncontradoException;
-import ar.edu.iua.iw3.modelo.Historico.Historico;
-import springfox.documentation.spring.web.json.Json;
-
-
+import ar.edu.iua.iw3.modelo.Historico;
 
 
 @RestController

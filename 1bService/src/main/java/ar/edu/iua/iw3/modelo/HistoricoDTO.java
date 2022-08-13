@@ -1,4 +1,4 @@
-package ar.edu.iua.iw3.modelo.Historico;
+package ar.edu.iua.iw3.modelo;
 
 import java.util.Date;
 

@@ -1,20 +1,16 @@
 package ar.edu.iua.iw3.negocio.service;
 
-import java.beans.ConstructorProperties;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 
-import ar.edu.iua.iw3.modelo.Historico.HistoricoDTO;
+import ar.edu.iua.iw3.modelo.HistoricoDTO;
 import ar.edu.iua.iw3.modelo.cache.Memcache;
 import ar.edu.iua.iw3.util.MensajeRespuesta;
 import ar.edu.iua.iw3.util.RespuestaGenerica;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import org.aspectj.apache.bcel.classfile.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +18,8 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.iua.iw3.negocio.excepciones.NegocioException;
 import ar.edu.iua.iw3.negocio.excepciones.NoEncontradoException;
-import ar.edu.iua.iw3.modelo.Historico.Historico;
-import ar.edu.iua.iw3.modelo.Historico.HistoricoRepository;
+import ar.edu.iua.iw3.modelo.Historico;
+import ar.edu.iua.iw3.modelo.persistencia.HistoricoRepository;
 
 
 @Service

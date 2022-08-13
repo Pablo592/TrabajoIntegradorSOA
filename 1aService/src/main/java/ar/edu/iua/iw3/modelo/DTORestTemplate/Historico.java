@@ -23,12 +23,13 @@ public class Historico implements Serializable{
 
 	private RawData rawData;
 
+	private Ubicacion ubicacion;
+
 	private String categoria;
 
 	private String subCategoria;
 
 	private String identificador;
-
 
 	public long getId_historico() {
 		return id_historico;
@@ -52,6 +53,14 @@ public class Historico implements Serializable{
 
 	public void setRawData(RawData rawData) {
 		this.rawData = rawData;
+	}
+
+	public Ubicacion getUbicacion() {
+		return ubicacion;
+	}
+
+	public void setUbicacion(Ubicacion ubicacion) {
+		this.ubicacion = ubicacion;
 	}
 
 	public String getCategoria() {
