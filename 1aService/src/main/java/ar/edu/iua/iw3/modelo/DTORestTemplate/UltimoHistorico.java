@@ -13,6 +13,7 @@ public class UltimoHistorico implements Serializable {
                 ", categoria='" + categoria + '\'' +
                 ", subCategoria='" + subCategoria + '\'' +
                 ", identificador=" + identificador +
+                ", ubicacion=" + ubicacion +
                 '}';
     }
 
@@ -26,6 +27,7 @@ public class UltimoHistorico implements Serializable {
 
     private Long identificador;
 
+    private Ubicacion ubicacion;
 
     public Date getFechaHoraRecepcion() {
         return fechaHoraRecepcion;
@@ -65,6 +67,14 @@ public class UltimoHistorico implements Serializable {
 
     public void setIdentificador(Long identificador) {
         this.identificador = identificador;
+    }
+
+    public Ubicacion getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
     }
 }
 

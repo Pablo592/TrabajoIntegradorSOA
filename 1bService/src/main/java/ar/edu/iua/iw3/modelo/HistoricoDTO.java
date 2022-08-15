@@ -10,6 +10,7 @@ public class HistoricoDTO {
         this.rawData = h.getRawData();
         this.subCategoria = h.getSubCategoria();
         this.identificador = h.getId_historico();
+        this.ubicacion = h.getUbicacion();
     }
 
     @Override
@@ -19,7 +20,8 @@ public class HistoricoDTO {
                 ", rawData=" + rawData +
                 ", categoria='" + categoria + '\'' +
                 ", subCategoria='" + subCategoria + '\'' +
-                ", identificador='" + identificador + '\'' +
+                ", identificador=" + identificador +
+                ", ubicacion=" + ubicacion +
                 '}';
     }
 
@@ -33,9 +35,11 @@ public class HistoricoDTO {
 
     private Long identificador;
 
+    private Ubicacion ubicacion;
 
 
     //-------Setters and Getters---------
+
 
     public Date getFechaHoraRecepcion() {
         return fechaHoraRecepcion;
@@ -73,11 +77,16 @@ public class HistoricoDTO {
         return identificador;
     }
 
-    public void setIndicador(Long identificador) {
+    public void setIdentificador(Long identificador) {
         this.identificador = identificador;
     }
 
+    public Ubicacion getUbicacion() {
+        return ubicacion;
+    }
 
-
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
+    }
 }
 
