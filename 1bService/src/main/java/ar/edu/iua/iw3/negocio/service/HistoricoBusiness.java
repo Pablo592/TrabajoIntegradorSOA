@@ -27,15 +27,15 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 
 	public HistoricoBusiness() throws IOException {
 	}
-
 	private static String ultimo  = "ULTIMO";
-
-	private Memcache cache = new Memcache();
+	@Autowired
+	private Memcache cache;
 
 	private Logger log = LoggerFactory.getLogger(HistoricoBusiness.class);
 
 	@Autowired
 	private HistoricoRepository historicoDAO;
+
 
 
 

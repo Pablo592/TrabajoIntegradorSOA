@@ -2,17 +2,23 @@ package ar.edu.iua.iw3.modelo.cache;
 
 import ar.edu.iua.iw3.modelo.Historico;
 import net.spy.memcached.MemcachedClient;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
-
-@SuppressWarnings("serial")
+@Component
 public class Memcache{
 
 private   MemcachedClient mcc;
 
-    public Memcache() throws IOException {
-        this.mcc = new MemcachedClient(new InetSocketAddress("127.0.0.1", 11311));
+
+    public Memcache( @Value("${conexioncache.nombre}") String nombreServicio, @Value("${conexioncache.puerto}") Integer puerto) throws IOException {
+
+        this.mcc = new MemcachedClient(new InetSocketAddress(nombreServicio,puerto));
         // Connecting to Memcached server on localhost
 }
 
