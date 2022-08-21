@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 import ar.edu.iua.iw3.negocio.service.IHistoricoBusiness;
 import ar.edu.iua.iw3.negocio.excepciones.NegocioException;
@@ -41,6 +42,17 @@ public class HistoricoRestController {
 			return new ResponseEntity<Historico>(HttpStatus.NOT_FOUND);
 		}
 	}
+	//---------Listar por ID------------------
+
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Historico>> listAll() {
+		try {
+			return new ResponseEntity<List<Historico>>(historicoBusiness.list(), HttpStatus.OK);
+		} catch (NegocioException e) {
+			return new ResponseEntity<List<Historico>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+	}
+
 	//---------Guardar Historico en BD------------------
 
 	@PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)

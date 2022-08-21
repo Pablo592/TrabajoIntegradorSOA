@@ -37,8 +37,6 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 	private HistoricoRepository historicoDAO;
 
 
-
-
 	@Override
 	public Historico load(Long id) throws NoEncontradoException, NegocioException {
 		Optional<Historico> op;
@@ -56,8 +54,16 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 
 	@Override
 	public List<Historico> list() throws NegocioException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Historico> op;
+		try {
+			op =  historicoDAO.findAll();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new NegocioException(e);
+		}
+		
+		return op;
 	}
 
 	@Override
