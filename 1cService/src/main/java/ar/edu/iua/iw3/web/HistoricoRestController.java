@@ -75,6 +75,20 @@ public class HistoricoRestController {
 					return new ResponseEntity<List<Historico>>(HttpStatus.NOT_FOUND);
 				}
 		}
+		
+		//---------Lista de Valores------------------
+
+		@GetMapping(value = "/order-by-category/{category}/{order}", produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<List<Historico>> loadByCategory(@PathVariable("category") String category,@PathVariable("order") String order) {
+
+				try {
+					return new ResponseEntity<List<Historico>>(historicoBusiness.listByCategory(category,order), HttpStatus.OK);
+				} catch (NegocioException e) {
+					return new ResponseEntity<List<Historico>>(HttpStatus.INTERNAL_SERVER_ERROR);
+				} catch (NoEncontradoException e) {
+					return new ResponseEntity<List<Historico>>(HttpStatus.NOT_FOUND);
+				}
+		}
 
 	
 }

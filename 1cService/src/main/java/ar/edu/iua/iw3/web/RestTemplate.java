@@ -1,11 +1,13 @@
 package ar.edu.iua.iw3.web;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ar.edu.iua.iw3.modelo.Historico;
 
@@ -33,11 +35,11 @@ public class RestTemplate {
         System.out.println(forObject.toString());
         return forObject;
     }
-    public Object getHistoricosList() {
+    public List<Historico> getHistoricosList() {
         String url = "http://localhost:8090/historico/all";
-        Object forObject = restTemplate.getForObject(url,Object.class);
+        Historico[] forObject = restTemplate.getForObject(url, Historico[].class);
         log.info("Result" + forObject);
-        return forObject;
+        return  Arrays.asList(forObject);
     }   
 
 }

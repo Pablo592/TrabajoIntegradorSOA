@@ -22,7 +22,7 @@ public class RestTemplate1B {
 
 
     public UltimoHistorico getHistoricoUltimo() {
-        String url = "http://localhost:8090/historico/last";
+        String url = "http://localhost:8091/historico/last";
         UltimoHistorico forObject = restTemplate.getForObject(url,UltimoHistorico.class);
         log.info("Result" + forObject);
         System.out.println(forObject.toString());
@@ -41,7 +41,6 @@ public class RestTemplate1B {
       MensajeRespuesta mensaje =  new MensajeRespuesta();
       return restTemplate.postForObject("http://localhost:8090/historico/add",historico,mensaje.getClass());
     }
-
 
     public void deleteHistorico(Long id) throws RestClientException{
         restTemplate.delete("http://localhost:8090/historico/".concat(String.valueOf(id)));
