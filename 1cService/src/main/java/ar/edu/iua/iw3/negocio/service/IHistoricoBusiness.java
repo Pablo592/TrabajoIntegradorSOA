@@ -18,6 +18,7 @@ public interface IHistoricoBusiness {
 	public Historico load(Long id) throws NoEncontradoException, NegocioException;
 	public List<Historico> list() throws NegocioException, NoEncontradoException;
 	public List<Historico> listByCategory(String category, String order) throws NegocioException, NoEncontradoException;
+	public List<Historico> listBySubCategory(String category, String subcategory,String order) throws NegocioException, NoEncontradoException;
 	public HistoricoDTO loadLastHistory() throws NoEncontradoException, NegocioException, JsonProcessingException;
 	
 }

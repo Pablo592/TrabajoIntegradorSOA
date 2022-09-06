@@ -91,6 +91,23 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 		
 		return orderResults;
 	}
+	
+	@Override
+	public List<Historico> listBySubCategory(String category,String subcategory,String order) throws NegocioException, NoEncontradoException {
+		
+		List<Historico> orderResults = list();
+		orderResults  = orderResults.stream().filter(p -> p.getCategoria().toLowerCase().equals(category.toLowerCase())).collect(Collectors.toList());
+		orderResults  = orderResults.stream().filter(p -> p.getSubCategoria().toLowerCase().equals(subcategory.toLowerCase())).collect(Collectors.toList());
+		
+		if(order.equals("desc")) {
+			Collections.sort(orderResults, (s1, s2) -> { return s1.getFechaHoraRecepcion().compareTo(s2.getFechaHoraRecepcion()); });
+		}else {
+			Collections.sort(orderResults, Collections.reverseOrder((s1, s2) -> { return s1.getFechaHoraRecepcion().compareTo(s2.getFechaHoraRecepcion());}));
+		}
+		
+		return orderResults;
+	}
+
 
 
 
