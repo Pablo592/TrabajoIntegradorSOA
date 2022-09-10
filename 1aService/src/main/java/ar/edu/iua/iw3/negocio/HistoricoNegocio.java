@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -51,6 +52,35 @@ public class HistoricoNegocio implements IHistoricoNegocio{
         }
         return o.get();
     }
+    
+    @Override
+    public List<Historico> buscarPorCategoria(String categoria,String order) throws NegocioException, NoEncontradoException {
+    	List<Historico> o = null;
+        try {
+            o = rest1B.getByCategory(categoria, order);
+        } catch (Exception e) {
+            if(o == null)
+                throw new NoEncontradoException("No hay historicos cargados");
+            log.error(e.getMessage(), e);
+            throw new NegocioException(e);
+        }
+        return o;
+    }
+    
+    @Override
+    public List<Historico> buscarPorSubcategoria(String categoria,String subcategoria,String order) throws NegocioException, NoEncontradoException {
+        List<Historico> o = null;
+        try {
+            o = rest1B.getBySubcategory(categoria, subcategoria, order);
+        } catch (Exception e) {
+            if(o == null)
+                throw new NoEncontradoException("No hay historicos cargados");
+            log.error(e.getMessage(), e);
+            throw new NegocioException(e);
+        }
+        return o;
+    }
+
 
 
     @Override

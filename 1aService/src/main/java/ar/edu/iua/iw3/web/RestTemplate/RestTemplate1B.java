@@ -4,6 +4,10 @@ import ar.edu.iua.iw3.modelo.DTORestTemplate.Historico;
 import ar.edu.iua.iw3.modelo.DTORestTemplate.UltimoHistorico;
 import ar.edu.iua.iw3.util.MensajeRespuesta;
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +32,22 @@ public class RestTemplate1B {
         System.out.println(forObject.toString());
         return forObject;
     }
+    public List<Historico> getByCategory(String categoria,String order) {
+        String url = "http://localhost:8091/historico/order-by-category/".concat(String.valueOf(categoria)).concat("/"+String.valueOf(order));
+        Historico[] forObject = restTemplate.getForObject(url,Historico[].class);
+        log.info("Result" + forObject);
+        System.out.println(forObject.toString());
+        return  Arrays.asList(forObject);
+    }
+    public List<Historico> getBySubcategory(String categoria,String subcategoria,String order) {
+        String url = "http://localhost:8091/historico/order-by-subcategory/".concat(String.valueOf(categoria)).concat("/"+String.valueOf(subcategoria)).concat("/"+String.valueOf(order));
+        Historico[] forObject = restTemplate.getForObject(url,Historico[].class);
+        log.info("Result" + forObject);
+        System.out.println(forObject.toString());
+        return  Arrays.asList(forObject);
+    }
     
-    
-    
+  
     public Historico getHistorico(Long id) {
         String url = "http://localhost:8090/historico/".concat(String.valueOf(id));
         Historico forObject = restTemplate.getForObject(url, Historico.class);
