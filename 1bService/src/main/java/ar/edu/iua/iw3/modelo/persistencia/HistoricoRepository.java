@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface HistoricoRepository extends JpaRepository<Historico, Long>{
 
 
-	@Query(value = "select * from historico order by id_historico desc limit 1;", nativeQuery = true)
-	Optional<Historico> findLast();
+	@Query(value = "select * from historico  where identificador=? order by fecha_hora_recepcion desc limit 1;", nativeQuery = true)
+	Optional<Historico> findLast(String identificador);
 
 }

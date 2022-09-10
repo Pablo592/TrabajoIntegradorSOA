@@ -73,6 +73,9 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 			historico.setFechaHoraRecepcion(new Date());
 			historicoDAO.save(historico);
 			m.setMensaje(historico.toString());
+			
+			ultimo=historico.getIdentificador();
+			
 			cache.agregar(historico,ultimo,3600);
 			log.debug(historico + "\nGuardado en el cache");
 			return new RespuestaGenerica<Historico>(historico, m);
@@ -105,14 +108,15 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 	}
 
 	@Override
-	public HistoricoDTO loadLastHistory() throws NoEncontradoException, NegocioException{
+	public HistoricoDTO loadLastHistory(String identificador) throws NoEncontradoException, NegocioException{
 		Gson gson = new Gson();
 		String	ultimoHistorico = null;
 		Optional<Historico> o = null;
+		ultimo=identificador;
 		ultimoHistorico =  cache.buscar(ultimo);
 		if(ultimoHistorico == null || ultimoHistorico == "") {
 			try {
-				o = historicoDAO.findLast();
+				o = historicoDAO.findLast(ultimo);
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 				throw new NegocioException(e);

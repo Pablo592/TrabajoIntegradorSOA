@@ -21,13 +21,15 @@ public class RestTemplate1B {
     org.springframework.web.client.RestTemplate restTemplate;
 
 
-    public UltimoHistorico getHistoricoUltimo() {
-        String url = "http://localhost:8091/historico/last";
+    public UltimoHistorico getHistoricoUltimo(String identificador) {
+        String url = "http://localhost:8091/historico/last/".concat(String.valueOf(identificador));
         UltimoHistorico forObject = restTemplate.getForObject(url,UltimoHistorico.class);
         log.info("Result" + forObject);
         System.out.println(forObject.toString());
         return forObject;
     }
+    
+    
     
     public Historico getHistorico(Long id) {
         String url = "http://localhost:8090/historico/".concat(String.valueOf(id));

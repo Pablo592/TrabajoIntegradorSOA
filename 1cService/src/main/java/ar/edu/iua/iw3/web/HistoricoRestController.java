@@ -1,6 +1,7 @@
 package ar.edu.iua.iw3.web;
 
 import ar.edu.iua.iw3.modelo.HistoricoDTO;
+import ar.edu.iua.iw3.modelo.UltimoHistorico;
 import ar.edu.iua.iw3.util.MensajeRespuesta;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -48,18 +49,18 @@ public class HistoricoRestController {
 	
 	//---------Ultimo valor ------------------
 
-	@GetMapping(value = "/last", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<HistoricoDTO> loadLasted() {
-
-			try {
-				return new ResponseEntity<HistoricoDTO>(historicoBusiness.loadLastHistory(), HttpStatus.OK);
-			} catch (NegocioException e) {
-				return new ResponseEntity<HistoricoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
-			} catch (NoEncontradoException e) {
-				return new ResponseEntity<HistoricoDTO>(HttpStatus.NOT_FOUND);
-			} catch (JsonProcessingException e) {
-				return new ResponseEntity<HistoricoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
-			}
+	@GetMapping(value = "/last/{identificador}")
+	public ResponseEntity<UltimoHistorico> loadLast(@PathVariable("identificador") String identificador) throws NegocioException, NoEncontradoException, JsonProcessingException {
+		try {
+			Historico h = new Historico();
+			return new ResponseEntity<UltimoHistorico>(historicoBusiness.loadLastHistory(identificador), HttpStatus.OK);
+		} catch (NegocioException e) {
+			log.error(e.getMessage(), e);
+			return new ResponseEntity<UltimoHistorico>(HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (NoEncontradoException e) {
+			log.error(e.getMessage(), e);
+			return new ResponseEntity<UltimoHistorico>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	//---------Lista de Valores------------------

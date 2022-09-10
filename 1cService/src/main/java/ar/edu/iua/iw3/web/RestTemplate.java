@@ -10,6 +10,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ar.edu.iua.iw3.modelo.Historico;
+import ar.edu.iua.iw3.modelo.UltimoHistorico;
 
 
 @RestController
@@ -26,6 +27,14 @@ public class RestTemplate {
     @Autowired
     public RestTemplate(RestTemplateBuilder builder) {
         this.restTemplate = builder.build();
+    }
+    
+    public UltimoHistorico getHistoricoUltimo(String identificador) {
+        String url = "http://localhost:8090/historico/last/".concat(String.valueOf(identificador));
+        UltimoHistorico forObject = restTemplate.getForObject(url,UltimoHistorico.class);
+        log.info("Result" + forObject);
+        System.out.println(forObject.toString());
+        return forObject;
     }
     
     public Historico getHistorico(Long id) {

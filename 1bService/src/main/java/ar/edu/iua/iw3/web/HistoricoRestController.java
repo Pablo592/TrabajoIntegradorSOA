@@ -68,11 +68,11 @@ public class HistoricoRestController {
 	}
 	//---------Ultimo valor ------------------
 
-	@GetMapping(value = "/last", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<HistoricoDTO> loadLasted() {
+	@GetMapping(value = "/last/{identificador}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HistoricoDTO> loadLasted(@PathVariable("identificador") String identificador) {
 
 			try {
-				return new ResponseEntity<HistoricoDTO>(historicoBusiness.loadLastHistory(), HttpStatus.OK);
+				return new ResponseEntity<HistoricoDTO>(historicoBusiness.loadLastHistory(identificador), HttpStatus.OK);
 			} catch (NegocioException e) {
 				return new ResponseEntity<HistoricoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
 			} catch (NoEncontradoException e) {

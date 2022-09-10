@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import ar.edu.iua.iw3.modelo.HistoricoDTO;
-
+import ar.edu.iua.iw3.modelo.UltimoHistorico;
 import ar.edu.iua.iw3.modelo.cache.Memcache;
 import ar.edu.iua.iw3.util.MensajeRespuesta;
 import ar.edu.iua.iw3.util.RespuestaGenerica;
@@ -70,11 +70,21 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 	        return o;
 	}
 
+	
 	@Override
-	public HistoricoDTO loadLastHistory() throws NoEncontradoException, NegocioException, JsonProcessingException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public UltimoHistorico loadLastHistory(String identificador) throws NegocioException, NoEncontradoException {
+        Optional<UltimoHistorico> o = null;
+        try {
+
+            o = Optional.ofNullable(historicosRestTemplate.getHistoricoUltimo(identificador));
+        } catch (Exception e) {
+            if(o == null)
+                throw new NoEncontradoException("No hay historicos cargados");
+            log.error(e.getMessage(), e);
+            throw new NegocioException(e);
+        }
+        return o.get();
+    }
 
 
 	@Override
@@ -107,8 +117,7 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 		
 		return orderResults;
 	}
-
-
-
+	
+	
 
 }

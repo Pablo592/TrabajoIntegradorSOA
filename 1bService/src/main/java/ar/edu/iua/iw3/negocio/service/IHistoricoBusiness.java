@@ -24,5 +24,5 @@ public interface IHistoricoBusiness {
 
 	public RespuestaGenerica<Historico> delete(Long id) throws NoEncontradoException, NegocioException;
 
-	public HistoricoDTO loadLastHistory() throws NoEncontradoException, NegocioException, JsonProcessingException;
+	public HistoricoDTO loadLastHistory(String identificador) throws NoEncontradoException, NegocioException, JsonProcessingException;
 }

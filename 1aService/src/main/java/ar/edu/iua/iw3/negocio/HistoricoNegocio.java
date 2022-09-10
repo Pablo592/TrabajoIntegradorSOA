@@ -38,11 +38,11 @@ public class HistoricoNegocio implements IHistoricoNegocio{
     }
 
     @Override
-    public UltimoHistorico buscarUltimoHistorico() throws NegocioException, NoEncontradoException {
+    public UltimoHistorico buscarUltimoHistorico(String identificador) throws NegocioException, NoEncontradoException {
         Optional<UltimoHistorico> o = null;
         try {
 
-            o = Optional.ofNullable(rest1B.getHistoricoUltimo());
+            o = Optional.ofNullable(rest1B.getHistoricoUltimo(identificador));
         } catch (Exception e) {
             if(o == null)
                 throw new NoEncontradoException("No hay historicos cargados");

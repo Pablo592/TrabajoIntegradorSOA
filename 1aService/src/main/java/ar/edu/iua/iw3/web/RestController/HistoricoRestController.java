@@ -42,11 +42,11 @@ public class HistoricoRestController {
 }
 
 
-	@GetMapping(value = "/last")
-	public ResponseEntity<UltimoHistorico> loadLast() throws NegocioException, NoEncontradoException {
+	@GetMapping(value = "/last/{identificador}")
+	public ResponseEntity<UltimoHistorico> loadLast(@PathVariable("identificador") String identificador) throws NegocioException, NoEncontradoException {
 		try {
 			Historico h = new Historico();
-			return new ResponseEntity<UltimoHistorico>(historicoNegocio.buscarUltimoHistorico(), HttpStatus.OK);
+			return new ResponseEntity<UltimoHistorico>(historicoNegocio.buscarUltimoHistorico(identificador), HttpStatus.OK);
 		} catch (NegocioException e) {
 			log.error(e.getMessage(), e);
 			return new ResponseEntity<UltimoHistorico>(HttpStatus.INTERNAL_SERVER_ERROR);
