@@ -6,8 +6,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ar.edu.iua.iw3.modelo.Historico;
 import ar.edu.iua.iw3.modelo.UltimoHistorico;
@@ -16,11 +16,18 @@ import ar.edu.iua.iw3.modelo.UltimoHistorico;
 @RestController
 public class RestTemplate {
 
+    private String direccionConexionB;
     private Logger log = LoggerFactory.getLogger(RestTemplate.class);
-    
-    
-    //@Autowired
-    //org.springframework.web.client.RestTemplate restTemplate;
+
+
+    RestTemplate(@Value("${conexion.direccionB}") String direccionB, org.springframework.web.client.RestTemplate restTemplate){
+        this.direccionConexionB = direccionB;
+
+        this.restTemplate = restTemplate;
+    }
+
+
+
     private final org.springframework.web.client.RestTemplate restTemplate;
 
 

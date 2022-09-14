@@ -7,7 +7,7 @@ import ar.edu.iua.iw3.negocio.excepciones.NegocioException;
 import ar.edu.iua.iw3.negocio.excepciones.NoEncontradoException;
 import ar.edu.iua.iw3.util.MensajeRespuesta;
 import ar.edu.iua.iw3.util.RespuestaGenerica;
-import ar.edu.iua.iw3.web.RestTemplate.RestTemplate1C;
+import ar.edu.iua.iw3.web.RestTemplate.RestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class HistoricoNegocio implements IHistoricoNegocio{
     private Logger log = LoggerFactory.getLogger(HistoricoNegocio.class);
 
     @Autowired
-    private RestTemplate1C rest1C;
+    private RestTemplate rest1C;
 
     @Override
     public Historico buscarHistorico(Long id) throws NegocioException, NoEncontradoException {

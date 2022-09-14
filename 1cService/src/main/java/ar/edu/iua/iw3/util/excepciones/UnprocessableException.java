@@ -1,4 +1,4 @@
-package ar.edu.iua.iw3.negocio.excepciones;
+package ar.edu.iua.iw3.util.excepciones;
 
 public class UnprocessableException extends Exception{
     public UnprocessableException() {    }

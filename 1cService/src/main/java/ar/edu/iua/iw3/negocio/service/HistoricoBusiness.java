@@ -3,8 +3,8 @@ package ar.edu.iua.iw3.negocio.service;
 
 import ar.edu.iua.iw3.modelo.Historico;
 import ar.edu.iua.iw3.modelo.UltimoHistorico;
-import ar.edu.iua.iw3.negocio.excepciones.NegocioException;
-import ar.edu.iua.iw3.negocio.excepciones.NoEncontradoException;
+import ar.edu.iua.iw3.util.excepciones.NegocioException;
+import ar.edu.iua.iw3.util.excepciones.NoEncontradoException;
 import ar.edu.iua.iw3.web.RestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

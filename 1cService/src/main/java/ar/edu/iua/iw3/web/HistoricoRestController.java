@@ -1,12 +1,9 @@
 package ar.edu.iua.iw3.web;
 
-import ar.edu.iua.iw3.modelo.HistoricoDTO;
 import ar.edu.iua.iw3.modelo.UltimoHistorico;
-import ar.edu.iua.iw3.util.MensajeRespuesta;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 
 import ar.edu.iua.iw3.negocio.service.IHistoricoBusiness;
-import ar.edu.iua.iw3.negocio.excepciones.NegocioException;
-import ar.edu.iua.iw3.negocio.excepciones.NoEncontradoException;
+import ar.edu.iua.iw3.util.excepciones.NegocioException;
+import ar.edu.iua.iw3.util.excepciones.NoEncontradoException;
 import ar.edu.iua.iw3.modelo.Historico;
 
 
