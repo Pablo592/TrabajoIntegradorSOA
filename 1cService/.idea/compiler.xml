@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="1bService" />
         <module name="TrabajoIntegradorSOA" />
         <module name="1aService" />
+        <module name="1cService" />
+        <module name="1bService" />
       </profile>
     </annotationProcessing>
   </component>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="1aService" options="-parameters" />
       <module name="1bService" options="-parameters" />
+      <module name="1cService" options="-parameters" />
       <module name="TrabajoIntegradorSOA" options="-parameters" />
     </option>
   </component>

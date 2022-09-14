@@ -14,6 +14,8 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ar.edu.iua.iw3.negocio.excepciones.NegocioException;
@@ -57,7 +59,7 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 		
 		List<Historico> op;
 		try {
-			op =  historicoDAO.findAll();
+			op = (List<Historico>) historicoDAO.findAll();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new NegocioException(e);
@@ -65,6 +67,22 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 		
 		return op;
 	}
+
+
+	@Override
+	public Page listPage(Pageable pageable) throws NegocioException {
+
+		Optional<Page> op;
+		try {
+			op = Optional.ofNullable(historicoDAO.findAll(pageable));
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new NegocioException(e);
+		}
+
+		return op.get();
+	}
+
 
 	@Override
 	public RespuestaGenerica<Historico> add(Historico historico) throws NegocioException {

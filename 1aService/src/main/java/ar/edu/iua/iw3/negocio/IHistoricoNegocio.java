@@ -14,6 +14,6 @@ public interface IHistoricoNegocio {
     UltimoHistorico buscarUltimoHistorico(String identificador) throws NegocioException, NoEncontradoException;
     RespuestaGenerica<Historico> agregar(Historico historico) throws NegocioException;
     RespuestaGenerica<Historico> eliminar(Long id) throws NegocioException, NoEncontradoException;
-    List<Historico> buscarPorCategoria(String categoria, String order) throws NegocioException, NoEncontradoException;
-    List<Historico> buscarPorSubcategoria(String categoria, String subcategoria, String order) throws NegocioException, NoEncontradoException;
+    List<Historico> buscarPorCategoria(String category,String order,String pageSize, String pageIndex) throws NegocioException, NoEncontradoException;
+    List<Historico> buscarPorSubcategoria(String category,String subcategory,String order,String pageSize, String pageIndex) throws NegocioException, NoEncontradoException;
 }

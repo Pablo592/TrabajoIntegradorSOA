@@ -6,6 +6,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -44,10 +46,20 @@ public class HistoricoRestController {
 	}
 	//---------Listar por ID------------------
 
+
 	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Historico>> listAll() {
 		try {
 			return new ResponseEntity<List<Historico>>(historicoBusiness.list(), HttpStatus.OK);
+		} catch (NegocioException e) {
+			return new ResponseEntity<List<Historico>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping(value = "/all-page", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Historico>> listAllPage(Pageable pageable) {
+		try {
+			return new ResponseEntity<List<Historico>>(historicoBusiness.listPage(pageable).getContent(), HttpStatus.OK);
 		} catch (NegocioException e) {
 			return new ResponseEntity<List<Historico>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} 

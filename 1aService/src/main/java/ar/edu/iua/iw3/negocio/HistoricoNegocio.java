@@ -7,7 +7,7 @@ import ar.edu.iua.iw3.negocio.excepciones.NegocioException;
 import ar.edu.iua.iw3.negocio.excepciones.NoEncontradoException;
 import ar.edu.iua.iw3.util.MensajeRespuesta;
 import ar.edu.iua.iw3.util.RespuestaGenerica;
-import ar.edu.iua.iw3.web.RestTemplate.RestTemplate1B;
+import ar.edu.iua.iw3.web.RestTemplate.RestTemplate1C;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +22,13 @@ public class HistoricoNegocio implements IHistoricoNegocio{
     private Logger log = LoggerFactory.getLogger(HistoricoNegocio.class);
 
     @Autowired
-    private RestTemplate1B rest1B;
+    private RestTemplate1C rest1C;
 
     @Override
     public Historico buscarHistorico(Long id) throws NegocioException, NoEncontradoException {
         Optional<Historico> o = null;
         try {
-                o = Optional.ofNullable(rest1B.getHistorico(id));
+                o = Optional.ofNullable(rest1C.getHistorico(id));
         } catch (Exception e) {
             if(o == null)
                 throw new NoEncontradoException("No se encuentra al historico con id= " + id);
@@ -43,7 +43,7 @@ public class HistoricoNegocio implements IHistoricoNegocio{
         Optional<UltimoHistorico> o = null;
         try {
 
-            o = Optional.ofNullable(rest1B.getHistoricoUltimo(identificador));
+            o = Optional.ofNullable(rest1C.getHistoricoUltimo(identificador));
         } catch (Exception e) {
             if(o == null)
                 throw new NoEncontradoException("No hay historicos cargados");
@@ -54,10 +54,10 @@ public class HistoricoNegocio implements IHistoricoNegocio{
     }
     
     @Override
-    public List<Historico> buscarPorCategoria(String categoria,String order) throws NegocioException, NoEncontradoException {
+    public List<Historico> buscarPorCategoria(String category,String order,String pageSize, String page) throws NegocioException, NoEncontradoException {
     	List<Historico> o = null;
         try {
-            o = rest1B.getByCategory(categoria, order);
+            o = rest1C.getByCategory(category, order,pageSize,page);
         } catch (Exception e) {
             if(o == null)
                 throw new NoEncontradoException("No hay historicos cargados");
@@ -68,10 +68,10 @@ public class HistoricoNegocio implements IHistoricoNegocio{
     }
     
     @Override
-    public List<Historico> buscarPorSubcategoria(String categoria,String subcategoria,String order) throws NegocioException, NoEncontradoException {
+    public List<Historico> buscarPorSubcategoria(String category,String subcategory,String order,String pageSize, String page) throws NegocioException, NoEncontradoException {
         List<Historico> o = null;
         try {
-            o = rest1B.getBySubcategory(categoria, subcategoria, order);
+            o = rest1C.getBySubcategory(category, subcategory, order,pageSize,page);
         } catch (Exception e) {
             if(o == null)
                 throw new NoEncontradoException("No hay historicos cargados");
@@ -86,7 +86,7 @@ public class HistoricoNegocio implements IHistoricoNegocio{
     @Override
     public RespuestaGenerica<Historico> agregar(Historico historico) throws NegocioException{
             try {
-                MensajeRespuesta mensajeRespuesta =  rest1B.addHistorico(historico);
+                MensajeRespuesta mensajeRespuesta =  rest1C.addHistorico(historico);
                 return new RespuestaGenerica<Historico>(historico, mensajeRespuesta);
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
@@ -101,7 +101,7 @@ public class HistoricoNegocio implements IHistoricoNegocio{
         if(h == null)
             throw new NoEncontradoException("El usuario que desea eliminar no se encuentra registrado");
         try {
-            rest1B.deleteHistorico(id);
+            rest1C.deleteHistorico(id);
             return new RespuestaGenerica<Historico>(h, m);
         } catch (Exception e) {
             log.error(e.getMessage(), e);

@@ -17,9 +17,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 public interface IHistoricoBusiness {
 	
 	public Historico load(Long id) throws NoEncontradoException, NegocioException;
-	public List<Historico> list() throws NegocioException, NoEncontradoException;
-	public List<Historico> listByCategory(String category, String order) throws NegocioException, NoEncontradoException;
-	public List<Historico> listBySubCategory(String category, String subcategory,String order) throws NegocioException, NoEncontradoException;
+	public List<Historico> list(String pageSize,String pageIndex) throws NegocioException, NoEncontradoException;
+	public List<Historico> listByCategory(String category,String order,String pageSize, String pageIndex) throws NegocioException, NoEncontradoException;
+	public List<Historico> listBySubCategory(String category,String subcategory,String order,String pageSize, String pageIndex) throws NegocioException, NoEncontradoException;
 	public UltimoHistorico loadLastHistory(String identificador) throws NoEncontradoException, NegocioException, JsonProcessingException;
 	
 }
+

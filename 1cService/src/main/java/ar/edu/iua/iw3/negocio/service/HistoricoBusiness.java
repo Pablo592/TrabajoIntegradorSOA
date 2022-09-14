@@ -1,35 +1,20 @@
 package ar.edu.iua.iw3.negocio.service;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
-import ar.edu.iua.iw3.modelo.HistoricoDTO;
+import ar.edu.iua.iw3.modelo.Historico;
 import ar.edu.iua.iw3.modelo.UltimoHistorico;
-import ar.edu.iua.iw3.modelo.cache.Memcache;
-import ar.edu.iua.iw3.util.MensajeRespuesta;
-import ar.edu.iua.iw3.util.RespuestaGenerica;
+import ar.edu.iua.iw3.negocio.excepciones.NegocioException;
+import ar.edu.iua.iw3.negocio.excepciones.NoEncontradoException;
 import ar.edu.iua.iw3.web.RestTemplate;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import ar.edu.iua.iw3.negocio.excepciones.NegocioException;
-import ar.edu.iua.iw3.negocio.excepciones.NoEncontradoException;
-import ar.edu.iua.iw3.modelo.Historico;
-
-
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class HistoricoBusiness implements IHistoricoBusiness{
@@ -57,10 +42,10 @@ public class HistoricoBusiness implements IHistoricoBusiness{
     }
 
 	@Override
-	public List<Historico> list() throws NegocioException, NoEncontradoException {
+	public List<Historico> list(String pageSize, String page) throws NegocioException, NoEncontradoException {
 		List<Historico> o = null;
 	        try {
-	           o = historicosRestTemplate.getHistoricosList();
+	           o = historicosRestTemplate.getHistoricosList(pageSize,page);
 	        } catch (Exception e) {
 	            if(o == null)
 	                throw new NoEncontradoException("No se encuentra ninguna lista de historicos");
@@ -88,9 +73,9 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 
 
 	@Override
-	public List<Historico> listByCategory(String category,String order) throws NegocioException, NoEncontradoException {
+	public List<Historico> listByCategory(String category,String order,String pageSize, String page) throws NegocioException, NoEncontradoException {
 				
-		List<Historico> orderResults = list();
+		List<Historico> orderResults = list(pageSize,page);
 		orderResults  = orderResults.stream().filter(p -> p.getCategoria().toLowerCase().equals(category.toLowerCase())).collect(Collectors.toList());
 		
 		if(order.equals("desc")) {
@@ -103,9 +88,9 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 	}
 	
 	@Override
-	public List<Historico> listBySubCategory(String category,String subcategory,String order) throws NegocioException, NoEncontradoException {
+	public List<Historico> listBySubCategory(String category,String subcategory,String order,String pageSize, String page) throws NegocioException, NoEncontradoException {
 		
-		List<Historico> orderResults = list();
+		List<Historico> orderResults =  list(pageSize,page);
 		orderResults  = orderResults.stream().filter(p -> p.getCategoria().toLowerCase().equals(category.toLowerCase())).collect(Collectors.toList());
 		orderResults  = orderResults.stream().filter(p -> p.getSubCategoria().toLowerCase().equals(subcategory.toLowerCase())).collect(Collectors.toList());
 		
@@ -121,3 +106,4 @@ public class HistoricoBusiness implements IHistoricoBusiness{
 	
 
 }
+

@@ -58,13 +58,15 @@ public class HistoricoRestController {
 			return new ResponseEntity<UltimoHistorico>(HttpStatus.NOT_FOUND);
 		}
 	}
-	@GetMapping(value = "/order-by-category/{categoria}/{order}")
+	@GetMapping(value = "/order-by-category/{categoria}/{order}/{size}/{page}")
 	public ResponseEntity<List<Historico>> filtrarPorCategoria(
 			@PathVariable("categoria") String categoria,
-			@PathVariable("order") String order) throws NegocioException, NoEncontradoException {
+			@PathVariable("order") String order,
+			@PathVariable("size") String size,
+			@PathVariable("page") String page) throws NegocioException, NoEncontradoException {
 		try {
 			Historico h = new Historico();
-			return new ResponseEntity<List<Historico>>(historicoNegocio.buscarPorCategoria(categoria,order), HttpStatus.OK);
+			return new ResponseEntity<List<Historico>>(historicoNegocio.buscarPorCategoria(categoria,order,size,page), HttpStatus.OK);
 		} catch (NegocioException e) {
 			log.error(e.getMessage(), e);
 			return new ResponseEntity<List<Historico>>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -73,14 +75,15 @@ public class HistoricoRestController {
 			return new ResponseEntity<List<Historico>>(HttpStatus.NOT_FOUND);
 		}
 	}
-	@GetMapping(value = "/order-by-subcategory/{categoria}/{subcategoria}/{order}")
+	@GetMapping(value = "/order-by-subcategory/{categoria}/{subcategoria}/{order}/{size}/{page}")
 	public ResponseEntity<List<Historico>> filtrarPorSubcategoria(
 			@PathVariable("categoria") String categoria,
 			@PathVariable("subcategoria") String subcategoria,
-			@PathVariable("order") String order) throws NegocioException, NoEncontradoException {
+			@PathVariable("order") String order,
+			@PathVariable("size") String size,
+			@PathVariable("page") String page) throws NegocioException, NoEncontradoException {
 		try {
-			Historico h = new Historico();
-			return new ResponseEntity<List<Historico>>(historicoNegocio.buscarPorSubcategoria(categoria, subcategoria, order), HttpStatus.OK);
+			return new ResponseEntity<List<Historico>>(historicoNegocio.buscarPorSubcategoria(categoria, subcategoria, order,size,page), HttpStatus.OK);
 		} catch (NegocioException e) {
 			log.error(e.getMessage(), e);
 			return new ResponseEntity<List<Historico>>(HttpStatus.INTERNAL_SERVER_ERROR);

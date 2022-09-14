@@ -44,10 +44,10 @@ public class RestTemplate {
         System.out.println(forObject.toString());
         return forObject;
     }
-    public List<Historico> getHistoricosList() {
-        String url = "http://localhost:8090/historico/all";
+    public List<Historico> getHistoricosList(String pageSize,String page) {
+        String url = "http://localhost:8090/historico/all-page?size=".concat(pageSize)+"&page=".concat(page);
         Historico[] forObject = restTemplate.getForObject(url, Historico[].class);
-        log.info("Result" + forObject);
+        log.info("Result" + Arrays.toString(forObject));
         return  Arrays.asList(forObject);
     }   
 

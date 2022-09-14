@@ -64,7 +64,7 @@ public class HistoricoRestController {
 	}
 	
 	//---------Lista de Valores------------------
-
+/*
 		@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<List<Historico>> loadAll() {
 
@@ -76,26 +76,32 @@ public class HistoricoRestController {
 					return new ResponseEntity<List<Historico>>(HttpStatus.NOT_FOUND);
 				}
 		}
-		
+		*/
 		//---------Lista de Valores------------------
 
-		@GetMapping(value = "/order-by-category/{category}/{order}", produces = MediaType.APPLICATION_JSON_VALUE)
-		public ResponseEntity<List<Historico>> loadByCategory(@PathVariable("category") String category,@PathVariable("order") String order) {
+		@GetMapping(value = "/order-by-category/{category}/{order}/{size}/{page}", produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<List<Historico>> loadByCategory(@PathVariable("category") String category,
+															  @PathVariable("order") String order,
+															  @PathVariable("size") String size,
+															  @PathVariable("page") String page) {
 
 				try {
-					return new ResponseEntity<List<Historico>>(historicoBusiness.listByCategory(category,order), HttpStatus.OK);
+					return new ResponseEntity<List<Historico>>(historicoBusiness.listByCategory(category,order,size,page), HttpStatus.OK);
 				} catch (NegocioException e) {
 					return new ResponseEntity<List<Historico>>(HttpStatus.INTERNAL_SERVER_ERROR);
 				} catch (NoEncontradoException e) {
 					return new ResponseEntity<List<Historico>>(HttpStatus.NOT_FOUND);
 				}
 		}
-		@GetMapping(value = "/order-by-subcategory/{category}/{subcategory}/{order}", produces = MediaType.APPLICATION_JSON_VALUE)
+		@GetMapping(value = "/order-by-subcategory/{category}/{subcategory}/{order}/{size}/{page}", produces = MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<List<Historico>> loadByCategory(@PathVariable("category") String category,
-				@PathVariable("subcategory") String subcategory,@PathVariable("order") String order) {
+															  @PathVariable("subcategory") String subcategory,
+															  @PathVariable("order") String order,
+															  @PathVariable("size") String size,
+															  @PathVariable("page") String page) {
 
-				try {
-					return new ResponseEntity<List<Historico>>(historicoBusiness.listBySubCategory(category,subcategory,order), HttpStatus.OK);
+			try {
+					return new ResponseEntity<List<Historico>>(historicoBusiness.listBySubCategory(category,subcategory,order,size,page), HttpStatus.OK);
 				} catch (NegocioException e) {
 					return new ResponseEntity<List<Historico>>(HttpStatus.INTERNAL_SERVER_ERROR);
 				} catch (NoEncontradoException e) {
@@ -105,3 +111,4 @@ public class HistoricoRestController {
 
 	
 }
+
