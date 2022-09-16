@@ -1,5 +1,6 @@
 package ar.edu.iua.iw3.modelo;
 
+import javax.persistence.Column;
 import java.util.Date;
 
 public class HistoricoDTO {
@@ -11,6 +12,8 @@ public class HistoricoDTO {
         this.subCategoria = h.getSubCategoria();
         this.identificador = h.getId_historico();
         this.ubicacion = h.getUbicacion();
+        this.altitud = h.getAltitud();
+        this.puntoRocio = h.getPuntoRocio();
     }
 
     @Override
@@ -22,6 +25,8 @@ public class HistoricoDTO {
                 ", subCategoria='" + subCategoria + '\'' +
                 ", identificador=" + identificador +
                 ", ubicacion=" + ubicacion +
+                ", altitud='" + altitud + '\'' +
+                ", puntoRocio='" + puntoRocio + '\'' +
                 '}';
     }
 
@@ -36,6 +41,10 @@ public class HistoricoDTO {
     private Long identificador;
 
     private Ubicacion ubicacion;
+
+    private String altitud;
+
+    private String puntoRocio;
 
 
     //-------Setters and Getters---------
@@ -87,6 +96,22 @@ public class HistoricoDTO {
 
     public void setUbicacion(Ubicacion ubicacion) {
         this.ubicacion = ubicacion;
+    }
+
+    public String getAltitud() {
+        return altitud;
+    }
+
+    public void setAltitud(String altitud) {
+        this.altitud = altitud;
+    }
+
+    public String getPuntoRocio() {
+        return puntoRocio;
+    }
+
+    public void setPuntoRocio(String puntoRocio) {
+        this.puntoRocio = puntoRocio;
     }
 }
 

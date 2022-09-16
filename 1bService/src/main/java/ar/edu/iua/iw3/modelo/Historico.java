@@ -26,6 +26,8 @@ public class Historico implements Serializable{
 				", categoria='" + categoria + '\'' +
 				", subCategoria='" + subCategoria + '\'' +
 				", identificador='" + identificador + '\'' +
+				", altitud='" + altitud + '\'' +
+				", puntoRocio='" + puntoRocio + '\'' +
 				'}';
 	}
 
@@ -58,6 +60,11 @@ public class Historico implements Serializable{
 	@Column(length = 100,nullable = false)
 	private String identificador;
 
+	@Column(length = 100,nullable = false)
+	private String altitud;
+
+	@Column(length = 100,nullable = false)
+	private String puntoRocio;
 
 
 	//-------Setters and Getters---------
@@ -117,6 +124,22 @@ public class Historico implements Serializable{
 
 	public void setIdentificador(String identificador) {
 		this.identificador = identificador;
+	}
+
+	public String getAltitud() {
+		return altitud;
+	}
+
+	public void setAltitud(String altitud) {
+		this.altitud = altitud;
+	}
+
+	public String getPuntoRocio() {
+		return puntoRocio;
+	}
+
+	public void setPuntoRocio(String puntoRocio) {
+		this.puntoRocio = puntoRocio;
 	}
 
 	public String getJson(Historico historico){

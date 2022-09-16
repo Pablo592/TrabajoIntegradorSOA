@@ -6,13 +6,22 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Historico implements Serializable{
-	
+
 	@Override
 	public String toString() {
-		return "Historico [id_historico=" + id_historico + ", fechaHoraRecepcion=" + fechaHoraRecepcion + ", rawData="
-				+ rawData + ", categoria=" + categoria + ", subCategoria=" + subCategoria + ", indicador=" + identificador
-				+ "]";
+		return "Historico{" +
+				"id_historico=" + id_historico +
+				", fechaHoraRecepcion=" + fechaHoraRecepcion +
+				", rawData=" + rawData +
+				", ubicacion=" + ubicacion +
+				", categoria='" + categoria + '\'' +
+				", subCategoria='" + subCategoria + '\'' +
+				", identificador='" + identificador + '\'' +
+				", altitud='" + altitud + '\'' +
+				", puntoRocio='" + puntoRocio + '\'' +
+				'}';
 	}
+
 
 	public Historico(){}
 
@@ -30,6 +39,11 @@ public class Historico implements Serializable{
 	private String subCategoria;
 
 	private String identificador;
+
+	private String altitud;
+
+	private String puntoRocio;
+
 
 	public long getId_historico() {
 		return id_historico;
@@ -85,5 +99,21 @@ public class Historico implements Serializable{
 
 	public void setIdentificador(String identificador) {
 		this.identificador = identificador;
+	}
+
+	public String getAltitud() {
+		return altitud;
+	}
+
+	public void setAltitud(String altitud) {
+		this.altitud = altitud;
+	}
+
+	public String getPuntoRocio() {
+		return puntoRocio;
+	}
+
+	public void setPuntoRocio(String puntoRocio) {
+		this.puntoRocio = puntoRocio;
 	}
 }

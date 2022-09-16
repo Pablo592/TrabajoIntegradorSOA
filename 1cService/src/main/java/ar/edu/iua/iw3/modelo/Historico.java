@@ -8,13 +8,13 @@ import javax.persistence.*;
 import com.google.gson.Gson;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Entity
-@Table(name = "historico")
+
 public class Historico implements Serializable{
 
 	public Historico(){
 		this.fechaHoraRecepcion = new Date();
 	}
+
 
 	@Override
 	public String toString() {
@@ -26,39 +26,35 @@ public class Historico implements Serializable{
 				", categoria='" + categoria + '\'' +
 				", subCategoria='" + subCategoria + '\'' +
 				", identificador='" + identificador + '\'' +
+				", altitud='" + altitud + '\'' +
+				", puntoRocio='" + puntoRocio + '\'' +
 				'}';
 	}
 
-	private static final long serialVersionUID = -2096655693932225923L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_historico;
 	
-	@Column(length = 100, nullable = false)
-	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+
 	private Date fechaHoraRecepcion;
 
-	@OneToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name="rawData")
+
 	private RawData rawData;
 
-	@OneToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name="ubicacion")
+
 	private Ubicacion ubicacion;
 
 
-	@Column(length = 100,nullable = false)
+
 	private String categoria;
 	
-	@Column(length = 100,nullable = false)
+
 	private String subCategoria;
 	
-	@Column(length = 100,nullable = false)
+
 	private String identificador;
 
+	private String altitud;
 
+	private String puntoRocio;
 
 	//-------Setters and Getters---------
 
@@ -117,6 +113,22 @@ public class Historico implements Serializable{
 
 	public void setIdentificador(String identificador) {
 		this.identificador = identificador;
+	}
+
+	public String getAltitud() {
+		return altitud;
+	}
+
+	public void setAltitud(String altitud) {
+		this.altitud = altitud;
+	}
+
+	public String getPuntoRocio() {
+		return puntoRocio;
+	}
+
+	public void setPuntoRocio(String puntoRocio) {
+		this.puntoRocio = puntoRocio;
 	}
 
 	public String getJson(Historico historico){

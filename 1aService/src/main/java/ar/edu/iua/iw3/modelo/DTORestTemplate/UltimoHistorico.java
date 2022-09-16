@@ -14,6 +14,8 @@ public class UltimoHistorico implements Serializable {
                 ", subCategoria='" + subCategoria + '\'' +
                 ", identificador=" + identificador +
                 ", ubicacion=" + ubicacion +
+                ", altitud='" + altitud + '\'' +
+                ", puntoRocio='" + puntoRocio + '\'' +
                 '}';
     }
 
@@ -28,6 +30,11 @@ public class UltimoHistorico implements Serializable {
     private Long identificador;
 
     private Ubicacion ubicacion;
+
+    private String altitud;
+
+    private String puntoRocio;
+
 
     public Date getFechaHoraRecepcion() {
         return fechaHoraRecepcion;
@@ -75,6 +82,22 @@ public class UltimoHistorico implements Serializable {
 
     public void setUbicacion(Ubicacion ubicacion) {
         this.ubicacion = ubicacion;
+    }
+
+    public String getAltitud() {
+        return altitud;
+    }
+
+    public void setAltitud(String altitud) {
+        this.altitud = altitud;
+    }
+
+    public String getPuntoRocio() {
+        return puntoRocio;
+    }
+
+    public void setPuntoRocio(String puntoRocio) {
+        this.puntoRocio = puntoRocio;
     }
 }
 
